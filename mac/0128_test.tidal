@@ -1,0 +1,23 @@
+d1 $ sound "can:1"
+d1 $ sound "can:1" |+| vowel "a" |+| speed "0.5"
+d1 $ sound "can:1 can" |+| crush "10"
+d1 $ sound "hh*16" |+| pan sine1
+d1 $ sound "drum [can cp, can bd can:5]" |+| pan sine1
+t1 anticipate $ sound "{can can:2,can bd can:5}"
+hush
+d1 $ sound "{bd hh can,hh drum:2 mt mt}"
+t1 anticipate $ sound "bd can*32 bd can*16"
+
+
+d1 $ n "[e5 fs6 b5 a5,a5 b5 d6]*2" # sound "tutorial4"
+bps (120/120)
+hush
+d1 silence
+
+--huskell
+:t 'a'
+:t True
+:t "HELLO"
+:l newfunc1
+:l baby
+removeNonUppercase rRdD

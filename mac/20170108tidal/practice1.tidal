@@ -1,0 +1,36 @@
+hush
+d1 $ sound "bd" # shape "0.9" # vowel "u"
+
+d1 $ stack[
+sound "bd:3 [sn:1*2] ~ bd:3",
+sound "bass ~ bass:k",
+sounde "[~ cp]*4"
+]
+
+
+d2 $ every 3 (|-| up "2") $ every 2 (|+| up "5") $ sound "arpy*4" # speed "[1 1.5]"
+
+d3 $ sound "hh(4 ,8)"
+d3 $ e 3 4 $ sound "hh"
+
+cps 1
+bps (120/60)
+d1 silence
+
+d4 $ sound "arpy*8" # speed (run 8)
+d4 $ up (run 8) # sound "arpy"
+d4 $ sound "arpy*8" # up (every 2 (rev) $ run 8)
+
+d1 $ sound "arpy:0 arpy:2 arpy:3"
+
+d1 $ n "0 2 3" # s "arpy"
+d1 $ sound $ samples "drum*4" "0 1 2 3"
+d1 $ sound "drum:0 drum:1 drum:2 drum:3"
+ d1 $ s "drum arpy cp hh" # n (run 10)
+
+d1 $ sound "bd sn drum arpy" # pan "0 1"
+
+d1 $ up "0 0*2 0*4 1" # sound "[arpy, bass2,bd]"
+
+d1 $ sound "bd*16" # pan (slow 8 $ saw1)
+d1 $ sound "bd*8 sn*8" # pan (density 1.75 $ tri1)

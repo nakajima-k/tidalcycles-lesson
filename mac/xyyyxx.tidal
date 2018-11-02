@@ -1,0 +1,22 @@
+hush
+
+d1 $ n "c4 " # s "supergong"
+d1 $ n "c4 g5 ~" # s "supergong"
+d1 $ n "c4 [g5 ~ ~ a5] ~" # s "supergong"
+d1 $ n "c4 [g5 ~ d3 a5] ~" # s "supergong" # pan "0.7"
+d2 $ n "[c4 g3 c4]" # s "supergong" # pan "0.3"
+d3 $ n "c6 g5 c4" # s "superpiano" # sustain "0.5" # pan "0.3" # gain "0.8"
+d2 silence
+d4 $ n "~ [g6 c5 a5]" # s "superpiano" # sustain "0.5" # pan "0.7" # gain "0.8"
+
+d5 $ s "bd ~ ~ ~ ~ ~" # gain "1.2"
+d5 $ s "bd ~ hh ~ hh ~" # gain "1.2"
+d3 $ n "c5 [g6 ~ a5] c5" # s "superpiano" # sustain "0.5" # pan "0.3" # gain "0.8"
+
+t1 anticipate $ n "c4 [g5 ~ d3 [g4 e4]] a5" # s "supergong"
+
+t1 anticipate $ n "c4 [g5 ~ d3 [g4 e4]] [c4 ~ d3 g6]" # s "supergong"
+solo $ d1 $ n "c5 c6 c5 c6 e6" # s "superpiano"
+
+--d5 $ sound "mt ~ [~ ~ ~ mt] mt:2 ~ ~" # gain "1.2"
+hush

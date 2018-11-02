@@ -1,0 +1,13 @@
+d1 $ sound "bd sn"
+
+d2 $ sound "[] hh [] hh"
+
+d3 $ sound " [] [] arpy:7 [] []" # sine0 "0 1"
+
+d4 $ sound "bd [mt sn:3] cp []"
+
+d3 $ sound "[] [] future [] [] [] [arpy:5 arpy:2 arpy:4] []"
+
+d1 $ sound "sn sn hh:6 sn" # pan "0.3 0 0.4 1"
+
+hush

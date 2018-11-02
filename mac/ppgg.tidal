@@ -1,0 +1,42 @@
+d1 $ slow 4 $ sound "{glitch:2*16, bd*16?}"
+# hcutoff "400 600 1000 100 200"
+# speed "0.6 -1"
+
+d2 $ n "d6 ~ [g6 a6] ~" # sound "superpiano"
+# gain "0.7"
+
+d2 $ slow 2 $ n "d6 ~ [g6 a6] ~ d6 e6 ~ [a6 d5]" # sound "superpiano"
+# gain "0.7"
+
+d2 $ stack [
+slow 2 $ n "d6 ~ [g6 a6] ~ d6 e6 ~ [a6 d5]" # sound "superpiano"
+# gain "0.7" ,
+ n "[g6 e7]" # sound "superpiano" # gain "0.6 0.7"
+ # pan rand
+]
+
+d2 $ stack [
+slow 2 $ n "d6 ~ [g6 a6] ~ d6 e6 ~ [a6 d5]" # sound "superpiano"
+# gain "0.7" ,
+ n "[g6 e7]*2" # sound "superpiano" # gain "0.6 0.7"
+]
+
+d2 $ stack [
+slow 2 $ n "d6 ~ [g6 a6] ~ d6 e6 ~ [a6 d5]" # sound "superpiano"
+# gain "0.7" ,
+ n "[g6 e7]*4" # sound "superpiano" # gain "0.6 0.7"
+ # pan rand
+]
+
+d3 $ sound "~ ~ cp ~" # cutoff "5000" # shape "0.8"
+# pan rand
+
+d1 $ stack [
+slow 4 $ sound "{glitch:2*16, bd:2*16?}"
+# hcutoff "400 600 1000 100 200"
+# speed "0.6 -1" # pan "0.7",
+sound "bd(3,8)" # hcutoff "10" # shape "0.8 0.6"
+]
+
+d3 $ sound "~ hc cp hc" # cutoff "3000 6000 7000" # shape "0.8"
+# pan rand

@@ -1,0 +1,31 @@
+d1 $ sound "bd sn hh cp mt arpy drum"
+d1 $ sound "bd sn hh cp mt arpy drum odx bd arpy bass2 feel future"
+d2 $ sound "[hh hh sn hh][bd bd,cp]"
+
+d3 $ sound "arpy"
+
+d1 silence
+
+solo $ d1 $ sound "bd sn"
+d1 $ sound "[bd bd bd bd][sn]"
+d1 $ sound "[bd bd bd,[sn sn] cp,arpy [arpy arpy] arpy]"
+d1 $ sound "[bd sn sn*3]/2 [bd sn*3 bd*4]/3"
+d1 $ sound "[bd [sn sn]*2]/2 [bd [sn bd]/2]*2"
+d1 $ rev (sound "[bd bd][bd [sn [sn sn] sn] sn]")
+d1 $ every 4 (rev) (sound "bd*2 [bd [sn sn*2 sn] sn]")
+d1 $ slow 4 $ sound "bd*2 [bd [sn sn*2 hh] sn,hh hh hh hh]"
+d1 $ density 4 $ sound "bd*2 [bd [sn sn*2 sn] sn]"
+d1 $ every 4 (density 4) $ sound "bd*2 [bd [sn sn*2 sn] sn]"
+d1 $ sound (every 4 (density 4) "bd*2 [bd [sn sn*2 sn] sn]")
+d1 $ sound "bd*4" # gain "0.8"
+d1 $ sound "bd*4 [sn sn*2] bd,hh hh" # gain "0.8" # delay "0.5"
+d1 silence
+
+d2 $ sound "[hh hh sn hh][bd bd,cp]" # gain "0.9" # delay "0.7"
+d2 silence
+d1 $ sound "bd*4 [hh*2 sn]" # gain "1 0.8 0.5 0.7" # delay "0.5 1 0.4 1.2"
+d1 $ sound "bd*4 sn*4" # gain "[[1 0.8]*2 [0.5 0.7]]/2"
+d1 $ sound "bd:3*4" # gain (every 3 (rev) $ "1 0.8 0.5 0.7")
+d1 $ every 2 (|+| speed "2") $ sound "arpy*4" |=| speed "1"
+d1 $ every 2 (|+| speed "1") $ sound "arpy*4" |=| speed "1"
+d1 silence

@@ -1,0 +1,264 @@
+import Sound.Tidal.MIDI.Context
+devices <- midiDevices
+m1 <- midiStream devices "USB MIDI Device" 1 synthController
+
+let mute p = const(sound "~") $ p
+
+hush
+
+d1
+$ every 2 (rev)
+$ stack [
+ sound "hh hc hc in" # cutoff "5000 6000 4000 3000"
+ # shape "0.8",
+ whenmod 8 7 (const $ sound "cp cp cp ~ " )
+ $ sound "~ ~ cp ~"
+ ]
+ # room "1.4"
+
+d3 $ every 16 (const $ sound "{bd*32?,glitch:2*32?}")
+$ every 4 (stut 5 0.5 0.5) $ sound "bd hh bd hh" # cutoff "1000 800 9000 8000"
+# pan "0.9" # gain "1.9" # room "0"
+
+t1 (xfadeIn 16) $ smash 2 [1,4]
+$ jux ( (# up (slow 4 "6 2 3")) . rev . (0.5 <~))
+$ n (iter 7 "0 2 0 4") # up (slow 8 "0")
+# sound "supergong" # gain "0.8"
+# room "1.0"
+
+t1 (xfadeIn 16) $ slow 2 $ sound "[mt mt:2] ~ mt [mt:3 mt]"
+# room "1.5"
+
+d1
+$ every 2 (rev)
+$ stack [
+ sound "hh hc hc in" # cutoff "5000 6000 4000 3000"
+ # shape "0.8",
+ whenmod 8 7 (const $ sound "cp cp cp ~ " )
+ $ sound "~ ~ cp ~"
+ ]
+
+d3 $ every 16 (const $ sound "{bd*32?,glitch:2*32?}")
+$ every 4 (stut 5 0.5 0.5) $ sound "bd hh bd hh" # cutoff "1000 800 9000 8000"
+# pan "0.9" # gain "1.9"
+
+hush
+
+d1
+$ every 4 (rev)
+$ stack [
+slow 4 $ n "[c5 ~ a6 g5] [~ d5 ~] [g6 a6] ~ d6 e6 ~ [a6 d5]"
+# sound "superpiano" # gain "0.9" # pan "0",
+every 4 (const $ n "a5 e5 g5 b5" # sound "superpiano")
+$ n "g5*2 [~ b5] g5*2 e5*2" # sound "superpiano" # pan "1" # gain "0.9",
+slow 4
+$ every 2 (const $ n "c6 ~ e6 ~ [ g6 ~] ~ e6 [~ b6]" # sound "supersaw")
+$ n "c5 ~ e6 ~ ~ a6 ~ ~ " # sound "supersaw" # gain "0.3 0.5 0.9"
+]
+
+d2 $ sound "~ ~ cp ~" # cutoff "5000" # shape "0.8"
+# pan rand
+
+
+d1 $ slow 2 $ sound "{glitch:2*16, bd*16?}"
+# hcutoff "400 900 2000 1600 200"
+# speed "0.6 -1"
+
+d2 $ stack [
+slow 2 $ n "d6 ~ [g6 a6] ~ d6 e6 ~ [a6 d5]" # sound "superpiano"
+# gain "0.7" ,
+ n "[g6 e7]*4" # sound "superpiano" # gain "0.6 0.7"
+ # pan rand
+]
+
+d3 $ sound "~ ~ cp ~" # cutoff choose([5000 3000 2000]) # shape "0.8"
+# pan rand
+
+d1 $ stack [
+slow 4 $ sound "{glitch:2*16, bd:2*16?}"
+# hcutoff "400 600 1000 100 200"
+# speed "0.6 -1" # pan "0.7",
+sound "bd(3,8)" # hcutoff "10" # shape "0.8 0.6"
+]
+hush
+d1 $ smash 2 [1,4] $ n "c4" # sound "pluck"
+
+d1 $ smash 2 [1,4]
+$ jux ( (# up (slow 4 "5 2 3")) . rev . (0.5 <~))
+$ n (iter 7 "0 3 5 7") # up (slow 8 "0")
+# sound "pluck:2"
+
+d1 $ smash 2 [1,4]
+$ jux ( (# up (slow 4 "6 2 3")) . rev . (0.5 <~))
+$ n (iter 7 "0 2 0 4") # up (slow 8 "0")
+# sound "supergong" # gain "0.8"
+
+hush
+
+d3 $ sound "sax sax:4 sax:2" # pan sine1
+# speed (slow 4 $ scale 0 2.5 rand)
+# gain "0.6"
+
+d2 $ stack [
+jux (rev) $ every 4 (chop 16) $ sound "jungbass:2"
+# cutoff (choose [900,500,1000,100])
+# resonance "0.06",
+sound "909" # cutoff "1000" # shape "0.8"
+# up "5" # n "3 4",
+slow 2 $ sound "drum(3,8)",
+every 3 (jux (rev)) $ every 4 (stut 4 0.8 0.9)
+$ every 2 (rev) $ sound "hh hh ~ hh" # pan "0.8"
+# cutoff "6000"
+]
+
+d1
+$ every 12 (chop 16)
+$ every 6 (stut 4 0.5 0.5)
+$ every 7 (stut 8 0.5 0.5)
+$ every 2 (jux(rev))
+$ sound "odx feel:2 jungbass:2 feel"
+# hcutoff "100" # shape "0.6"
+# slide "0" # pitch2 "2"
+# speed (choose[-0.5,-1,0.8,1, 0.5, 1.5, 2])
+
+d1 $ mute $ randcat [sound "superchip*2",sound "superchip*16",sound "supergong*3" ]
+# sustain "0.05 0.6 1 0.08" # cut "1" # pan (scale 0.3 0.7 $ rand)
+
+d2 $ sound "stab:2" # pan "0.3"
+
+d2 $ stack [
+sound "stab:2" # pan "0.3",
+jux (rev) $ every 4 (rev) $ n "f5*2 g5*2 d5*2"
+# sound "tutorial4" # sustain "0.5"
+# cutoff (choose[5000,3000,1000,500,50,6])
+# resonance "1.2" # shape "0.6"
+]
+
+hush
+
+d2 $ every 3 (0.25 ~>) $ every 5 (rev) $ sound "909(3,8)"
+
+d2 $ sound "breaks157(3,8,5)" # begin (choose[0,1/32..(1-(1/32))])
+# pan rand # cutoff "900 8000"
+
+d1 $ sound "ulgab:3 [ulgab:4 mt]" # shape "0.5"
+
+d1 $ jux (0.5 ~>) $ sound "ulgab:3 [ulgab:4 mt]" # shape "0.5"
+# cutoff "400 700" # resonance "0.8" # pan "0.3"
+
+
+d2 $ sound "bd hh bd hh" # cutoff "1000 800 9000 8000"
+# pan "0.9" # gain "1.9"
+
+d1 $ sound (fit 2 ["bd", "sn", "arpy", "arpy:1", "casio"] "0 [~ 1] 2 1")
+
+d1 $ every 2 (rev) $ spin 2 $ (brak ( sound "sax:1(5,8)") )
+# cut "0.02" # shape "0.5" # slow 8 (up "-32 -2") # gain "1.0"
+# cutoff "500 4000 20" # delayfeedback "0.5 0.9"
+
+d1 $ slow (4) $ sound "sax:1 ~ sax:3 ~"
+# cut "10" # shape "0.5" # speed "4"
+
+d2 $ spin 2 $ (brak ( sound "mt:2(5,8)") )
+# cut "0.5" # shape "0.5" # slow 8 (up "-32-24") # gain "1.0"
+
+d2 $ sound "breaks157(2,8,4)" # begin (choose[0,1/32..(1/16)])
+# speed (scale (0.25) 0.7 $ rand)
+
+d3 $ jux (rev) $ (0.25 <~) $ every 4 (slow 2) $ sound "[odx,909](3,8)"
+# shape "0.5" # gain "1.1" # speed "0.75"
+
+d4 $ speed (0.5) $ sound "[~ bend]*2 bass"
+
+d1  $ n "d3 d3 d4 d3" # sound "tutorial4"
+# gain "1.2" # pan "0.7"
+
+d1 $ sometimes (|+| up (choose[3,7,2,9,(-3),(-7),(-9)])) $ n "~ 0 ~ 0"
+# sound "sid"
+
+d1 $ stut 4 0.2 (0.35) $ n "d3 d3 d4 d3" # sound "tutorial4"
+# gain "1.2" # pan "0.7"
+
+d1 $ stack [
+stut 4 0.2 (0.35) $ n "d3 d3 d4 d3" # sound "tutorial4"
+# gain "1.2" # pan "0.7",
+jux (rev) $ every 2 (rev) $ n "d6 ~ d6 a5 ~ ~ d5 ~"
+# sound "supergong" # pan "0.2" # sustain "0.05"
+]
+
+d2 $ sound "~ hh ~ hh" # pan "0.4" # gain "1.2"
+
+d3 $ every 2 (rev) $ spin 2 $ (brak ( sound "sax:1(5,8)") )
+# cut "0.02" # shape "0.5" # slow 8 (up "-32 -2")
+# gain "0"
+# cutoff "500 4000 20" # delayfeedback "0.5 0.9"
+
+
+d2 $ stack [
+sound "~ [hh] ~ hc:2" # pan "0.4" # gain "1.2",
+sound "bd:1" # pan "0.6" # gain "1.2"
+]
+
+d2 $ stack [
+sound "~ [hh hc] ~ hc:2" # pan "0.4" # gain "1.2",
+sound "bd:1(3,8)" # pan "0.6" # gain "1.2"
+]
+
+d2 $ stack [
+sound "~ [hh hc] cp:3 hc:2" # pan "0.4"
+# gain "1.2" ,
+sound "bd:1(3,8)" # pan "0.6" # gain "1.2"
+]
+
+d2 $ stack [
+sound "~ [hh hc] ~ hc:2" # pan "0.4" # gain "1.2",
+sound "bd:1(3,8)" # pan "0.6" # gain "1.2",
+every 2 (rev) $ stut 3 0.5 (0.5)
+$ sound "glitch:2(2,5,8)" # pan sine1
+]
+
+d3 $ every 2 (rev) $ spin 2 $ (brak ( sound "sax:1(5,8)") )
+# cut "0.02" # shape "0.5" # slow 8 (up "-32 -2")
+# gain "0."
+# cutoff "500 4000 20" # delayfeedback "0.5 0.9"
+
+
+d2 $ stack [
+sound "~ [hh hc] ~ hc:2" # pan "0.4" # gain "1.2",
+every 2 (rev) $ stut 3 0.5 (0.5)
+$ sound "glitch:6(2,5,8)" # pan sine1
+]
+
+d1  $ n "d3 c3 d3*32 c4" # sound "tutorial4"
+# gain "1.3" # pan "0.7" # sustain "0.6"
+
+d2 $ stack [
+sound "bd:1 [hh hc] bd:2 hc:2" # pan "0.4" # gain "1.2",
+every 4 (rev) $ stut 2 0.25 (0.5)
+$ sound "glitch:2(2,5,8)" # pan sine1
+# sustain "0.5"
+]
+
+d1 $ stack [
+stut 4 0.2 (0.35) $ n "d3 c3*3 d3 c4" # sound "tutorial4"
+# gain "1.2" # pan "0.7",
+jux (rev) $ every 2 (rev) $ n "d6 ~ d6 a5 ~ ~ d5 ~"
+# sound "supergong" # pan "0.2" # sustain "0.05"
+]
+
+d2 $ stack [
+sound "bd:1 [hc:2 hh hh] bd:2 hc:2" # pan "0.4" # gain "1.2",
+every 4 (rev) $ stut 2 0.25 (0.5)
+$ sound "glitch:2(2,5,8)" # pan sine1
+# sustain "0.5"
+]
+
+solo $ d1 $ stack [
+stut 4 0.2 (0.35) $ n "a3 a3*3 ~ a3" # sound "tutorial4"
+# gain "1.2" # pan "0.7"]
+
+d2 $ stack [
+sound "bd:1 [hc:2 hh hh] ~ hc:2" # pan "0.4" # gain "1.2"
+]
+
+hush

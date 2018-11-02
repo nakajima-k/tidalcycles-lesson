@@ -1,0 +1,248 @@
+d1 $ n "c4 e4 g3 a4" # sound "supercomparator"
+# decay "0.2"
+
+d1 $ jux (rev) $ every 2 (rev) $ slow 4 $ sound "in ~ bd ~"
+# shape "0.8" # speed "-1"
+
+d2 $ sound "hh*2 hh hh hh"
+
+d2 $ stack [
+ jux (rev) $ every 2 (rev) $ n "d5 ~ [d7 a5] [b6  fs6]"
+ # sound "supersaw"
+ # gain "0.8" # sustain "0.02",
+ every 4 (chop 16) $ sound "[amencutup:2 amencutup amencutup:3] bd hh hh*2" # gain "1.4"
+]
+
+hush
+
+pt 4 = d4 $ sound "hh hh hh cp mt"
+pt 5 = d4 $ gap 16 $ sound "hh bass hh glitch:2"
+pt 6 = d4 $ sound "hh hh hh"
+
+pt 4
+pt 5
+pt 6
+
+hush
+
+let p2 = "hh"
+
+d3 $ stack [
+every 4 (rev) $ every 2 (slow 2) $ sound "hh" # pan rand,
+slow 2 $ every 2 (rev) $ every 4 (chop 4)
+$ sound "amencutup ~ [amencutup:3 amencutup:2] ~"
+# vowel "a o i u" # gain "1.1"
+]
+
+d2 $ every 3 (0.5 <~) $ every 2 (slow 2) $ sound "amencutup"
+# pan rand # speed (scale (-1.0) 1.0 $ rand)
+
+d3 $ stack [
+ stut 5 0.1 (0.1) $ every 4 (0.25 <~) $ every 2 (0.5 <~)
+ $ stut 4 0.5 (0.5) $ sound "voodoo:3 [909 ~]",
+ every 2 (chop 16) $ every 2 (rev) $ spread (slow) [2,4]
+ $ sound "glitch:2(3,8,5)",
+ every 2 (rev) $ every 2 (0.5 <~) $ stut 2 0.3 (0.5)
+ $ n "a3 ~ [b5 a5] ~ a5 a6 d5 ~" # sound "tutorial4"
+ # sustain "0.2" # pan rand # orbit "0.4" # room "0.25"
+ ]
+
+d3
+$ slowspread density [0.5, 0.75 .. 3]
+$ degradeBy 0.4
+$ stack[
+ every 3 (stut 4 0.5 (0.5)) $ sound "amencutup*12" # cut "2" # pan rand # n (choose[0, 1 .. 31]) # gain (choose[1,1.15,1.2]) # up (choose[-5,-1,0,-2,-3,-4]),
+ stut 4 0.5 (0.5) $ sound "pad:2(3,8)" # up "-16 -15 -16" # begin (choose[0, 0.1 .. 0.5]) # cut "4" # gain "1" # shape "0.3" # pan rand,
+ sound "909*4" # speed "0.8" # gain "1.2" # shape "0.5",
+ sound "[~ 808:1*2]*4" # speed "0.75" # gain "1.1" # pan "0 1 0 1"
+]
+
+d3
+$ slowspread degradeBy [0.7, 0.6 .. 0.0]
+$ stack[
+slow 4 $ every 3 (0.5 <~) $ every 2 (slow 2) $ n (run 32) # sound "amencutup" # pan rand # speed (scale (-1.0) 1.0 $ rand),
+spread (slow) [2,4] $ sound "[glitch:2](1,8,3)",
+stut 4 0.1 (0.5) $ every 2 (0.5 <~) $ every 3 (0.5 <~) $ sound "[voodoo, 909](3,8)" # speed "0.8" # gain "1.1",
+stut 4 0.5 (0.5) $ slow 4 $ sound "bass0*2" # speed "0.25" # cutoff "1200" # orbit "0.1" # room "0.25",
+stut 4 0.3 (0.5) $ slow 4 $ sound "808 cp" # speed "0.75 1.0",
+sound "wobble*4" # slow 4 (gain "1.3 0") # cut "1"
+]
+
+
+let p2 = "glitch:1 ~ glitch ~"
+p2 = "glitch ~ glitch:2 ~ ~"
+
+-- huskell
+let xs = [(1,3),(4,3),(2,4),(5,3),(5,6), (3,1)]
+[a + b | (a,b) <- xs]
+[x*100+3 | (x,3) <- xs]
+
+let p1 = "amencutup*3"
+
+d1 $ every 2 (0.25 <~) $ every 4 (slow 1.5)
+$ sound (samples p1 (every 2 (density 1.2 ) $ density 1.33 $ run 32))
+# speed "0.6 0.8 0.25"
+
+let p1 = "hh bd cp hh"
+let p1 = "hh hh hh hh"
+
+-- d2 $ sound "909(3,8)" # speed "0.8"
+
+d3 $ stack [
+ every 4 (slow 1.5) $ every 2 (rev) $ sound "~ ~ glitch:2 [glasstap:2 glitch:1]"
+ # speed "0.3 0.6 0.9" # gain "1.1",
+ sound "909:4(3,8)" # speed "0.9 0.5 0.8",
+  every 2 (chop 3) $ sound "bass2:2/2" # cutoff "100" # pan "0.3"
+]
+
+d3 $ stack [
+every 4 (crush 11) $ smash 2 [2,4,6] $ sound (every 2 (0.5 <~)
+$ samples "tabla*8" (every 5 (0.5 <~) $ every 3 (0.25 <~) $ density 1.25 $ run 26))
+# speed "0.8 1.0 0.5 -0.8 1.0 0.75" # gain "0.9",
+Follow sumisonic and others on SoundCloud.
+
+Create a SoundCloud accountSign in
+github.com/sumisonic/TidalDiar…/pattern_0002.tidal
+
+d1 $ stack[
+smash 2 [2,4,6] $ sound (every 2 (0.5 <~) $ samples "tabla*8" (every 5 (0.5 <~) $ every 3 (0.25 <~) $ density 1.25 $ run 26)) # speed "0.8 1.0 0.5 -0.8 1.0 0.75" # gain "0.9",
+every 2 (0.5 <~) $ spread slow [4,6] $ sound "909(6,8)"
+# speed "0.8" # shape "0.1" # gain "[1.1 0.9]*2",
+]
+
+hush
+
+d3 $ stack [
+every 5 (rev) $ sound "click:3(9,12)"
+# speed "0.5 1.0 1.5" # gain "1.5",
+sound "bass3/2 bleep:1" # speed "0.75" # gain "0.8",
+sound "glitch:2(10,43)" # slow 4 (speed "-4 -8")
+]
+
+t3 anticipate $ rev $ slow 4 $ chop 16 $ sound "breaks125"
+
+d3 $ stack [
+every 4 (slow 1.5) $ every 2 (rev) $ sound "~ ~ glitch:2 [glasstap:2 glitch:1]"
+# speed "0.3 0.7 0.9" # gain "1.1",
+sound "~ 909:4(3,8)"
+]
+
+hush
+
+d1 silence
+hush
+d2 $ sound "bd [~ hc] cp bd"
+# delay "0.3"
+# pan "0.3"
+
+d1 $ every 4 (rev)
+$ spread density [1,0.5]
+$ n "[a3 ~ a4 a3] a3 [a4 a3] ~"
+# sound "supergong"
+|+| vowel "a"
+# pan "0.8"
+
+d3 $ n "a1 a1 d2 a3" # sound "supersaw"
+# sustain "0.2"
+
+hush
+
+d1 $ slowspread density [1,0.75]
+$ spread density [1,0.5,0.25]
+$ degradeBy 0.5
+$ sound (samples "hh*16" (irand 64))
+# gain "0.8"
+# unit "c"
+# speed (choose[1,2])
+# delay "0.1 0.9 0.5"
+# delaytime "0.2"
+# delayfeedback "0.5"
+
+hush
+
+
+d1 $ slowspread density [1,0.8]
+$ n "[e6 ~ a6] ~ [a5 e5] [a6 d5 ~ d5]"
+# sound "tutorial4"
+# delay "0.1 0.6 0.9 0.4"
+# sustain "0.3 1.6 0.4 1.5"
+
+d2 $ stack [
+sound "hh*8?" # pan "0.7",
+sound "~ [cp ~ ~ mt]" # pan "0.3"
+# delay "1.2?"
+# speed "0.8",
+sound "bd ~ ~ ~ ~ ~ ~ ~,bass:2"
+]
+
+d1 $ slowspread density [1,0.5]
+$ every 2 (rev)
+$ n "{e6 ~ [a5 b5] [b6 ~ d5],gs6 ~ [d6 e6*7] ~}"
+# sound "tutorial4"
+# delay "0.5 0.6 0.9 1.4"
+# sustain "1.3 1.6 0.4 1.5"
+# pan sine1
+# delaytime "0.6 0.5 1.2"
+# vowel "a i o i a"
+-- # crush "0.5 0.7 0.2 0.6"
+
+d1 $ slowspread density [1,0.75]
+$ spread density [1,0.5,0.25]
+$ degradeBy 0.5
+$ sound (samples "hh*16" (irand 64))
+# gain "0.8"
+# unit "c"
+# speed (choose[1,2])
+# delay "0.1 0.9 0.5"
+# delaytime "0.2"
+# delayfeedback "0.5"
+
+
+bps (200/120)
+d1 $ sound "can:1"
+t1 anticipate $ sound "can:1 can2 ~ [~ can]" # vowel "a i o"
+d1 $ sound "can:1" |+| vowel "a" |+| speed "0.5"
+d1 $ sound "can:1 can" |+| crush "10"
+d1 $ sound "hh*16" |+| pan sine1
+d1 $ sound "drum [can cp, can bd can:5]" |+| pan sine1
+t1 anticipate $ sound "{can can:2,can bd can:5}"
+hush
+d1 $ sound "{bd hh can,hh drum:2 mt mt}"
+t1 anticipate $ sound "bd can*32 bd can*16"
+
+
+d1 $ n "[e5 fs6 b5 a5]*2" # sound "tutorial4"
+d1 $ n "[e5 fs6 b5 a5,a5 b5 d6]*2" # sound "tutorial4"
+d2 $ sound "bd ~ ~ hh bd ~ cp hh" # gain "1.1"
+bps (200/120)
+hush
+
+d1 silence
+
+bps (160/120)
+d1 $ n "[e5 fs6 b5 a5]*2" # sound "tutorial4"
+
+d1 $ n "[e5 fs6 b5 a5,a5 b5 d6]*2" # sound "tutorial4"
+d2 $ sound "bd ~ ~ hh bd ~ cp hh" # gain "1.1" # pan "0.3"
+d3 $ sound "mt:3 mt:1 ~ mt" # pan "0.8"
+
+hush
+
+d1 $ sound "in ~ "
+bps (60/120)
+
+d1 $ n "c5 ~ c5 ~ g5 ~ g5 ~ a5 ~ a5 ~ g5 ~ ~ ~" # sound "tutorial4"
+# sustain "0.5*14 2.0"
+
+d1 $ n "f5 ~ f5 ~ e5 ~ e5 ~ d5 ~ d5 ~ c5 ~ ~ ~" # sound "tutorial4"
+# sustain "0.5*14 2.0"
+
+hush
+
+--huskell
+:t 'a'
+:t True
+:t "HELLO"
+:l newfunc1
+:l baby
+removeNonUppercase rRdD

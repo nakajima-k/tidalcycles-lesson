@@ -1,0 +1,11 @@
+d1 $ midinote (slow 2 $ fmap ((+60) . (*7)) $ run 8) # s "supergong"
+# decay "[1 0.2]/4" # voice "[0.5 0]/8" # sustain (slow 16 $ scale 3 0.5 $ saw1)
+# pan "0"  # gain "0.8"
+
+d2 $ midinote (slow 2 $ fmap ((+80) . (*7)) $ run 8) # s "supergong"
+# decay "[0.3 0.2]/4" # voice "[0.2 0]/8" # sustain (slow 16 $ scale 3 0.5 $ saw1)
+# pan "0.9" # vowel "u o a e" # gain "0.8"
+
+d3 $ s "bd ~ ~ ~ ~ [bd hh] ~ ~ ~" # gain "1.2" # pan "0.5" # speed "0.6"
+
+hush

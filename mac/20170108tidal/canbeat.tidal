@@ -1,0 +1,21 @@
+bps(120/60)
+
+hush
+
+d1 $ every 4 (density 2) $ sound "can [can:5 can:3] [can:2 ~ can:5] can:5" # pan "0 1"
+
+d2 $ every 4 (rev) (sound "can:4 [can:2 ~] [can:2 ~ can:5] [can:5 can]") # pan "1 0"
+
+d3 $ sound "bd bd"
+
+d4 $ sound "[~ hh]*2"
+
+d3 $ sound "[bd sn:1]*2 cp"
+
+d1 $ every 4 (rev) (sound "[bd bd] [bd sn cp]")
+
+d1 $ every 4 (density 2) $ sound "bd*2 [bd [sn sn*2 sn] sn]"
+
+d1 $ sound "bd bd" # gain "0.9"
+
+hush

@@ -1,0 +1,81 @@
+
+hush
+
+d1 $ every 2 (rev) (sound "[808:5 808:5] ~ [808:5 808:5] 808:5 ~ 808:5 ")
+d1 silence
+d1 $ every 2 (rev) (sound "[808:7 808:7] ~ [808:7 808:7] 808:7 ~ 808:7 ")
+d1 $ sound "hh hh hh cp hh"
+d2 $ sound "bd"
+
+d2 $ sound "bd ~ bd" # gain "0.9"
+
+d2 $
+jux (iter 6) $ every 4 (chop 16) $
+every 6 (gap 4) $
+stack [
+  sound "bd ~ bd" # gain "0.9",
+  sound "bass bass:3 ~",
+  sound "bass ~ cp:3 ~" |+| pan rand,
+  sound e # delay "0.5",
+  sound "[arpy:4 arpy:2 ~ ~ ~ ] *4"
+]
+
+
+-- 楽器 "scsine" を定義して、引数の初期値を設定
+(sc, shape) <- scStream "scsine" [ F "freq" (Just 440.0)] 0
+
+-- SuperColliderに値を渡す変数を定義
+let freq = makeF shape "freq"
+
+sc $ jux(iter 8) $ freq "440 660 [110 220] 410 220"
+sc silence
+
+
+-- with sc
+(sc1,shape1) <- scStream "schh"
+[ F "vol" (Just 1.2),
+  F "freq" (Just 3000),
+  F "atk" (Just 0.01),
+  F "rel" (Just 0.2),
+  F "pos" (Just 0)
+] 0
+
+(sc2,shape2) <- scStream "scbass"
+[ F "freq" (Just 50),
+  F "pos" (Just 0.0),
+  F "vol" (Just 1.0)
+] 0
+
+let vol1 = makeF shape1 "vol"
+    freq1 = makeF shape1 "freq"
+    atk1 = makeF shape1 "atk"
+    rel1 = makeF shape1 "rel"
+    pos1 = makeF shape1 "pos"
+    vol2 = makeF shape2 "vol"
+    freq2 = makeF shape2 "freq"
+    atk2 = makeF shape2 "atk"
+    rel2 = makeF shape2 "rel"
+    pos2 = makeF shape2 "pos"
+
+cps (150/120)
+
+sc1 $rev $ freq1 "9000 [0 12000] 300 [5000 4000]" |+| vol1 "1.0" |+| rel1 "0.1" |+| atk1 "0.01"
+
+sc2 $ every 2 (jux (iter 4))
+$ stack [
+freq2 "50 [90 40] 10 30" |+| pos2 "-1 1 -0.6 0.6" |+| vol2 "2.0"
+freq2 "40 80" |+| pos2 "-0.6 0.6"
+]
+
+sc1 silence
+sc2 silence
+d1 $ sound "bd bd ~ bd"
+
+-- lesson huskell
+
+let e = "bass:2 cp"
+let arr = [1,2,3]
+let str = "moge"
+str == "moge"
+3.3 <= 1.2
+'ab'

@@ -1,0 +1,58 @@
+hush
+
+bps (240/120)
+
+d1 $ slowspread density [1,0.5]
+$ n "e6 ~ [a5 e5] [a6 ~ d5]"
+# sound "tutorial4"
+# delay "0.1 0.6 0.9 0.4"
+# sustain "0.3 0.6 0.4 1.5"
+
+d2 $ every 8 (chop 16)
+$ stack [
+sound "hh*8?" # pan "0.7",
+sound "~ [cp ~ cp? mt]" # pan "0.3"
+# delay "1.2?"
+# speed "0.8",
+sound "bd ~ ~ ~ ~ ~ ~ ~,bass:2"
+]
+
+d1 $ slowspread density [1,0.5]
+$ n "e6 ~ [a5*10 e5] [a6 ~ d5]"
+# sound "tutorial4"
+# delay "0.1 0.6 0.9 0.4"
+# sustain "0.3 1.6 0.4 1.5"
+
+d2 $ jux (iter 2)
+$ every 8 (chop 16)
+$ stack [
+sound "hh*8?" # pan "0.7",
+sound "~ [cp ~ ~ mt]" # pan "0.3"
+# delay "1.2?"
+# speed "0.8",
+sound "bd ~ ~ ~ ~ ~ ~ ~,bass:2"
+]
+
+d1 $ slowspread density [1,0.5]
+$ n "{e6 ~ [a5 b5] [b6 ~ d5],e5 ~ [d6 e6*7] ~}"
+# sound "tutorial4"
+# delay "0.5 0.6 0.9 0.4"
+# sustain "1.3 1.6 0.4 3.5"
+# pan sine1
+# delaytime "0.6"
+
+d3 $ sound "mt:2 [mt:4 mt] ~ mt" # speed "0.9"
+
+d1 $ every 8 (chop 16)
+$ slowspread density [1,0.5]
+$ n "e6 ~ [a5 b6 e5 ~] [a6 ~ [d5 e6 d6]]"
+# sound "tutorial4"
+# delay "0.1 0.6 0.9 0.4"
+# sustain "0.3 0.6 0.4 1.5"
+
+d3 $ every 8 (rev)
+$ stack [
+$ sound "mt:2 [mt:4 mt] ~ mt" # speed "0.9"
+]
+
+hush

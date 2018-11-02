@@ -1,0 +1,9 @@
+import Sound.Tidal.MIDI.Context
+
+displayOutputDevices >>= putStrLn
+
+devices <- midiDevices
+
+m1 <- midiStream devices "Circuit" 3 synthController
+
+m1 $ midinote "40 52"

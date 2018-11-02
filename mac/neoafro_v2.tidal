@@ -1,0 +1,111 @@
+hush
+bps (200/120)
+
+-- d2 $ n "c6 c4 c4 c4" # sound "tutorial4" # sustain "0.3"
+
+d1 $ sound "{mt:2 [mt:1 mt:4] ~ mt:5,~ ~ ~ ~}" # pan "0.9"
+
+--solo $ d2 $ sound "mt:4 ~ [mt:1 ~ mt:4] hh" # pan "0.1"
+d2 $ sound "{mt:4 ~ [mt:1 ~ mt:4] hh, ~ ~ ~ ~}" # pan "0.1" # speed "0.8"
+d4 $ sound "hh*8" # gain "1.0"
+
+d4 $ n "c4 " # s "supergong" # pan "0.8" # gain "0.9"
+d4 $ n "c4 [d4 g4] ~ a4 " # s "supergong" # pan "0.8" # gain "0.8"
+d3 $ sound "mt:2 [~ mt:4] ~ mt:5"
+d3 $ sound "mt:2 [cp? mt:4] ~ mt:5" # pan sine1
+d3 $ sound "mt:2 [cp*3 mt:4] ~ mt:5" # pan "1"
+
+
+d4 $ n "~ [e6 ~ g3 ~]" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+d4 $ every 2 (rev) $ n "{c3 [e6 ~ a3 ~],~ [c5 ~ ~ bs4] }" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+# delay "0.9"
+
+t4 $ anticipate $ n "{~ [e6 ~ g3 ~],c3 ~ a6 ~}" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+
+d4 $ n "{~ [e6 ~ g3 ~],c3 ~ a6 ~}" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+d4 $ every 2 (rev) $ n "g3 [e6 as5 g6 ~]" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+
+-- d4 $ n "g5 [d6 ~ g3 ~]" # s "superpiano" # sustain "0.4" # pan "0.3" # gain "0.7"
+d5 $ n "[c6 g7 c4]" # s "superpiano" # pan "0.3" # gain "0.7"
+
+ d5 silence
+d3 $ sound "hh*3"
+d3 $ sound "hh*8?"
+d3 $ sound "hh*8"
+
+-- breake
+solo $ d6 $ n "[c6 g7 c5]" # s "superpiano" # pan "1"
+
+d6 $ n "[c6 g7 [c5 d6]]" # s "superpiano" # pan "1"
+d6 $ n "[c6 g7 [c5 d6],g6 [a6 g6] ~]" # s "superpiano" # pan "1"
+d6 $ n "{c6 [g7 c6] [d5 c5],g6 [a6 g6] ~}" # s "superpiano" # pan "1"
+
+d6 $ every 4 (rev) $ n "{c6 [g7 c6] [d5 c5],g6 [a6 g6] ~}" # s "superpiano" # pan "1"
+d1 silence
+
+
+d1 $ n "a4 [d4 g5] [~]" # s "supergong" # sustain "1.4"
+d1 $ n "a4 c3" # s "supergong"
+d1 $ n "a4 [c3 d3]" # s "supergong"
+d1 $ n "a4 [c3 ~ d3 e4]" # s "supergong" # pan "0.7"
+d2 $ n "[c5 g4 c4] [d6 ~ g3 ~]" # s "superpiano" # sustain "0.2 " # pan "0.3" # gain "0.8"
+d1 silence
+d2 silence
+d4 $ n "c4 d4*2" # s "supersaw" # sustain "0.1 0.2" # pan "0.9"
+t4 anticipate $ n "e4 d4*6" # s "supersaw" # sustain "0.1 0.2" # pan "0.8"
+t4 anticipate $ n "e4 d3*3" # s "supersaw" # sustain "1.1 0.2" # pan "0.8"
+t4 anticipate $ n "e4 d4*2 g5" # s "supersaw" # sustain "0.5 0.3" # gain "0.9" # pan "0.3"
+
+d1 $ n "e4 d4*2 g5" # s "supersaw" # sustain "0.5 0.3" # gain "0.9" # pan "0.3"
+
+d3 $ sound "hh*3"
+d3 $ sound "hh*8?"
+d3 $ sound "hh*8"
+
+solo d6 $  n "{c6 [g7 c6] [d5 c5],g6 [a6 g6] ~}" # s "superpiano" # pan "1"
+d6 $  n "{c6 [g7 c6] [d5 c5],g6 [a6 g6] ~}" # s "superpiano" # pan "1"
+
+
+d3 silence
+d3 $ sound "hh*8" # gain "1.3"
+d3 $ sound "hh*4 hh*4" # gain "1.3"
+
+d1 $ sound "mt [mt:1 mt:4] ~ mt:5"
+d2 $ sound "mt:4 ~ [mt:1 ~ mt:4] hh" # pan "0.1" # speed "0.8"
+d4 $ n "{[c5 g4 c4] [d6 ~ g3 ~],[c7 ~ ~] [~ ~ d6 c6]}" # s "superpiano" # sustain "0.2 " # pan "0.3" # gain "0.8"
+d4 $ every 2 (rev) $ n "{[c5 g4 c4] [d6 ~ g3 ~],[c6 ~ ~] [~ ~ d6 c6]}" # s "superpiano" # sustain "0.2 " # pan "0.3" # gain "0.8"
+
+t4 anticipate $ every 2 (rev) $ n "{[c5 g4 c4] [d6 ~ g3 ~],[c6 ~ ~] [~ ~ d6 c6]}" # s "superpiano" # sustain "0.2 " # pan "0.3" # gain "0.8"
+
+d3 $ sound "hh*8" # pan sine1
+
+solo $ d3 $ sound "hh*8" # pan sine1
+-- # delay "1.2 0.3 0.2 1.5"
+
+d4 $ n "[c5 g4 c4] [d6 ~ g3 ~]" # s "superpiano" # gain "0.8"
+# sustain "0.2 0.7 0.5 1.0"
+# pan "0.3"
+# crush "0.5 0.9 0.1 0.8"
+
+solo $ d5 $ sound "{[hh*3] [hh*4],cp ~}"
+
+
+solo $ d2 $
+jux (iter 2) $
+every 8 (chop 16) $
+every 6 (gap 4) $
+stack [
+  sound "bd " # gain "0.9",
+  sound "hh hh ~ hh hh" |+| pan "0.7",
+  sound "mt ~ [mt mt:2] mt mt:3" |+| pan "0.3"
+]
+
+d3 $ sound "hh*8"
+--section 2
+d1 $ every 2 (rev) $ n "a4 ~ [~ a5] [c5 d5]  " # s "supergong"
+# delay "0.5"
+# speed "0.5"
+# gain "0.8"
+
+
+hush

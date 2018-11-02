@@ -1,0 +1,130 @@
+hush
+
+d5 $ midinote "0 6 55" # s "scbass"
+d5 $ n "c4 ~ e4 ~ a4" # s "scbass" # pan "0.7"
+solo $ d1 $  density 2 $ sound "hh hh hh? hh hh?"
+
+d3 $ every 2 (rev) (sound "[hh hh] ~ [mt:3 ~ ~ hh] hh ~ cp ") # speed "0.8" # pan "0.4"
+solo $ d1 $ sound "hh hh hh cp hh"
+d2 $ sound "bd"
+d1 $ sound "hh hh [hh hh?] cp hh"
+d1 $ sound "hh hh [hh hh?] [cp mt] hh"
+d1 $ sound "hh hh hh [cp [mt ~ mt] ] hh"
+d1 $ sound "hh [hh ~ mt ~] [hh hh?] [cp mt] hh"
+
+d3 $ sound "hh hh hh cp hh" # speed "-0.5" # pan rand
+solo $ d3 $ sound "hh hh hh cp hh" # speed "-0.5" # pan rand
+
+d2 $ sound "bd ~ bd" # gain "1.1"
+d4 $ sound "mt ~ [mt mt:2] mt mt:3" # pan rand
+
+solo $ d4 $ sound "mt ~ [mt mt:2] mt mt:3"
+
+--let e = "bass:2 ~ ~ bass:5"
+
+solo $ d2 $
+jux (iter 2) $
+every 8 (chop 16) $
+every 6 (gap 4) $
+stack [
+  sound "bd " # gain "0.9",
+  sound "hh hh ~ hh hh" |+| pan "0.7",
+  sound "mt ~ [mt mt:2] mt mt:3" |+| pan "0.3"
+-- sound e # delay "0.5"
+--  sound "[arpy:4 arpy:2 ~ ~ ~ ]"
+]
+
+d2 $ jux (iter 2) $ sound "mt ~ [~ mt:2 ] mt mt:3" # delay "0.5" # pan rand
+d3 $ sound "bd ~ cp ~"
+d1 $ sound "[hh ~ ~ hh] [~ ~ hh ~] [hh ~ hh ~] [~ hh hh ~]"
+d1 $ sound "[hh ~ ~ hh] [~ hh ~ hh] [hh ~ hh hh] [~ hh hh ~] hh*2?"
+d1 $ sound "[hh ~ hh ] [~ hh ~ ] [hh ~ hh] [~ ~ hh ~]"
+d1 $ sound "[hh ~ ~ hh ~ hh ~ ~]*2 " # speed "1"
+d1 $ sound "[h:8 ~ ~ ~ ~ ~ ~ ~] " # speed "1"
+d1 $ sound "[h:8 ~ ~ ~ ~ h:2 ~ ~] " # speed "1"
+d1 $ sound "[h:8 ~ ~ ~ ~ h:2 ~ ~] " # speed "-1"
+d3 $ sound "[bd ~ ~ bd ~ ~ bd ~]"
+d1 $ sound "[hh*4?] [hh*4]"
+d2 silence
+d3 $ sound "[bd ~ ~ bd cp:4 ~ bd cp?]"
+d5 $ sound " ~ ~ [~ ~ h:8?] h:9? " # speed "1"
+
+d1 $  density 2 $ sound "hh hh hh? hh hh?"
+
+solo $ d1 $  density 2 $ sound "hh hh hh? hh hh?"
+
+d2 $ density 2 $ sound "hh hh hh? hh?" # vowel "o u e i a" # pan rand # speed "-2"
+
+--d1 $ slow 1 $ sound "hh hh hh? hh hh?"
+d1 $ density 2 $ sound "hh hh hh? hh?" # vowel "o u e i a" # pan rand
+solo $ d2 $ density 2 $ sound "hh hh hh? hh?" # vowel "o u e i a" # pan rand # speed "-2"
+--d4 $ density 2 $ sound "hh hh hh? hh?" # vowel "o u e i a" # pan rand # speed "-2"
+
+sc2 $rev $ freq2 " ~ 5 ~ 65" |+| vol1 "1.0" |+| rel1 "0.4" |+| atk1 "0.06"
+sc2 silence
+
+d2 $ sound "bd:2" # vowel "i" # speed "-1.5"
+
+
+
+-- 楽器 "scsine" を定義して、引数の初期値を設定
+(sc, shape) <- scStream "scsine" [ F "freq" (Just 440.0)] 0
+
+-- SuperColliderに値を渡す変数を定義
+let freq = makeF shape "freq"
+solo $ sc $ freq "440 440 660 440 220 550" # pan rand
+sc $ jux(iter 8) $ freq "440 660 [110 220] 410 220"
+sc silence
+
+
+-- with sc
+(sc1,shape1) <- scStream "schh"
+[ F "vol" (Just 1.2),
+  F "freq" (Just 3000),
+  F "atk" (Just 0.01),
+  F "rel" (Just 0.2),
+  F "pos" (Just 0)
+] 0
+
+(sc2,shape2) <- scStream "scbass"
+[ F "freq" (Just 50),
+  F "pos" (Just 0.0),
+  F "vol" (Just 1.0)
+] 0
+
+let vol1 = makeF shape1 "vol"
+    freq1 = makeF shape1 "freq"
+    atk1 = makeF shape1 "atk"
+    rel1 = makeF shape1 "rel"
+    pos1 = makeF shape1 "pos"
+    vol2 = makeF shape2 "vol"
+    freq2 = makeF shape2 "freq"
+    atk2 = makeF shape2 "atk"
+    rel2 = makeF shape2 "rel"
+    pos2 = makeF shape2 "pos"
+
+cps (120/120)
+d1 silence
+sc1 $rev $ freq1 "9000 [10 12000] 3000 [8000 4000]" |+| vol1 "1.0" |+| rel1 "0.6" |+| atk1 "0.00"
+sc1 $ freq1 "1000 ~ [600 500] ~" |+| rel1 "0.4" |+| pan rand
+
+sc2 $ every 2 (jux (iter 2))
+$ stack [
+freq2 "50 [90 40] 100 30" |+| pos2 "-1 1 -0.6 0.6" |+| vol2 "2.0",
+freq2 "40 80 200" |+| pos2 "-0.6 0.6"
+]
+
+sc1 silence
+sc2 silence
+
+d1 $ every 2 (rev) (sound "[808:5 808:5] ~ [808:5 808:5] 808:5 ~ 808:5 ")
+d1 $ every 2 (rev) (sound "[808:5 808:5] ~ [808:5 808:5] 808:5 ~ [808:5]*2 ")
+d3 silence
+
+-- lesson huskell
+
+let arr = [1,2,3]
+let str = "moge"
+str == "moge"
+3.3 <= 1.2
+'ab'
